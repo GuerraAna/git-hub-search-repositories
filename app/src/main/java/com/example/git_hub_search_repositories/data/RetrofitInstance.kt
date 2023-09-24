@@ -5,9 +5,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 internal object RetrofitInstance {
 
+    private const val baseUrl = "https://api.github.com/"
+
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
