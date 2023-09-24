@@ -1,11 +1,11 @@
-package com.example.git_hub_search_repositories.user
+package com.example.git_hub_search_repositories.ui.user
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.git_hub_search_repositories.Repositories
 import com.example.git_hub_search_repositories.databinding.UsersCardBinding
+import com.example.git_hub_search_repositories.domain.Repositories
 
 internal class UserAdapter(
     private val context: Context,

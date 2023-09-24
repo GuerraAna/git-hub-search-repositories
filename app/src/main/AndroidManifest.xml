@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Githubsearchrepositories"
         tools:targetApi="31" >
         <activity
-            android:name=".GitHubSearchActivity"
+            android:name=".ui.GitHubSearchActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

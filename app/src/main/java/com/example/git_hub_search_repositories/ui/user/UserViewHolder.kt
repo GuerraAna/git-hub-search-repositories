@@ -1,13 +1,12 @@
-package com.example.git_hub_search_repositories.user
+package com.example.git_hub_search_repositories.ui.user
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.git_hub_search_repositories.Repositories
 import com.example.git_hub_search_repositories.databinding.UsersCardBinding
+import com.example.git_hub_search_repositories.domain.Repositories
 import com.squareup.picasso.Picasso
 
 internal class UserViewHolder(
@@ -24,13 +23,9 @@ internal class UserViewHolder(
     }
 
     private fun setupListeners(repository: Repositories) {
-        binding.card.setOnClickListener {
-            Toast.makeText(context, "CLICADO", Toast.LENGTH_SHORT).show()
-            openBrowser(repository.htmlUrl)
-        }
-
-        binding.shareUser.setOnClickListener {
-            shareRepositoryLink(repository.htmlUrl)
+        with(binding) {
+            card.setOnClickListener { openBrowser(repository.htmlUrl) }
+            shareUser.setOnClickListener { shareRepositoryLink(repository.htmlUrl) }
         }
     }
 

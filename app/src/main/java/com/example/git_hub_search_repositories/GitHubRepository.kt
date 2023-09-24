@@ -1,38 +1,19 @@
 package com.example.git_hub_search_repositories
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.git_hub_search_repositories.databinding.ActivityGithubSearchBinding
-import com.example.git_hub_search_repositories.user.UserAdapter
+import com.example.git_hub_search_repositories.domain.Repositories
+import com.example.git_hub_search_repositories.domain.RepositoryOwner
 
-data class RepositoryOwner(
-    val login: String,
-    val avatarUrl: String
-)
+/**
+ *
+ */
+internal class GitHubRepository {
 
-data class Repositories(
-    val id: Long,
-    val nodeId: String,
-    val name: String,
-    val fullName: String,
-    val private: Boolean,
-    val owner: RepositoryOwner,
-    val htmlUrl: String,
-    val description: String? = null,
-    val fork: Boolean,
-    val url: String
-)
+    suspend fun getRepositories(userName: String): List<Repositories> {
 
-internal class GitHubSearchActivity : AppCompatActivity() {
+        //TODO: Revert after api response is succeed
+        //return RetrofitInstance.api.getGitHubRepositories(userName).repositories
 
-    private lateinit var binding: ActivityGithubSearchBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupBinding()
-
-        val mockOfRepositories = listOf(
+        return listOf(
             Repositories(
                 id = 647032678,
                 nodeId = "R_kgDOJpDvZg",
@@ -94,19 +75,5 @@ internal class GitHubSearchActivity : AppCompatActivity() {
                 url = "https://api.github.com/repos/GuerraAna/abstergo-industries-aws"
             )
         )
-
-        setupAdapter(mockOfRepositories)
-    }
-
-    private fun setupBinding() {
-        binding = ActivityGithubSearchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
-
-    private fun setupAdapter(list: List<Repositories>) {
-        binding.usersList.apply {
-            layoutManager = LinearLayoutManager(this@GitHubSearchActivity)
-            adapter = UserAdapter(this@GitHubSearchActivity, list)
-        }
     }
 }
