@@ -1,5 +1,7 @@
 package com.example.git_hub_search_repositories.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -29,7 +31,24 @@ internal class GitHubSearchActivity : AppCompatActivity() {
 	}
 
 	private fun setupListeners() {
-		binding.confirmUsername.setOnClickListener { showUserNameRepositories() }
+		val sharedPreferences = getSharedPreferences("search", Context.MODE_PRIVATE)
+
+		binding.confirmUsername.setOnClickListener {
+			saveUserName(sharedPreferences)
+			showUserNameRepositories()
+		}
+
+		binding.loadUserName.setOnClickListener {
+			getLastUserNameSearched(sharedPreferences)
+		}
+	}
+
+	private fun saveUserName(sharedPreferences: SharedPreferences) {
+		val name = binding.usernameInput.text.toString()
+		sharedPreferences.edit().apply {
+			putString("userName", name)
+			apply()
+		}
 	}
 
 	private fun showUserNameRepositories() {
@@ -44,6 +63,11 @@ internal class GitHubSearchActivity : AppCompatActivity() {
 
 			false -> setupViewModel(userName)
 		}
+	}
+
+	private fun getLastUserNameSearched(sharedPreferences: SharedPreferences) {
+		val userName = sharedPreferences.getString("userName", null)
+		binding.usernameInput.setText(userName)
 	}
 
 	private fun setupViewModel(userName: String) {
